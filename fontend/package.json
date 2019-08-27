@@ -1,0 +1,42 @@
+{
+  "name": "fontend",
+  "version": "1.0.0",
+  "description": "basic using: webpack + vue + iview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --progress --color --config ./config/webpack.base.config.js",
+    "build": "webpack --config ./config/webpack.base.config.js --progress"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "vue-i18n": "^8.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
+    "qs": "^6.5.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "svg-sprite-loader": "^3.8.0",
+    "url-loader": "^1.0.1",
+    "vue": "^2.5.16",
+    "vue-loader": "^15.2.2",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.16",
+    "vuex": "^3.0.1",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
