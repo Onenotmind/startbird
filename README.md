@@ -1,0 +1,2 @@
+# startbird
+basic project config
