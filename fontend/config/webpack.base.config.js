@@ -4,6 +4,7 @@ const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const SpritePlugin = require(`svg-sprite-loader/plugin`)
 
 function resolve (...any) {
   return path.resolve(__dirname, '..', ...any)
@@ -53,11 +54,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        loader: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.svg$/,
-        loader: 'svg-sprite-loader'
+        loader: 'svg-sprite-loader',
+        options: {extract: true}
       },
       {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
@@ -93,6 +95,7 @@ module.exports = {
     // 打包前清除之前的打包目录
     new CleanWebpackPlugin(),
     // vue 打包需要
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new SpritePlugin()
   ]
 }
