@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Button type="info">Info</Button>
+    <Icon name="help" size="40" />
+    <Input placeholder="请输入内容" prefix-icon="search"/>
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 
 </style>
 <script>
+
 export default {
   name: 'App',
   components: {
