@@ -45,10 +45,9 @@
 </template>
 
 <script>
-import Icon from '../icon/icon.vue'
 export default {
   components: {
-    Icon
+    
   },
   props: {
     type: {
