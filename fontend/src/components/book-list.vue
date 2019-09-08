@@ -76,11 +76,11 @@ export default {
     },
     headerShow: {
       type: Boolean,
-      default: true
+      default: false
     },
     categoryTitle: {
       type: String,
-      default: 'MY BOOKS'
+      default: ''
     }
   },
   data () {

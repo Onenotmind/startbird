@@ -2,7 +2,7 @@
   <div id="app">
     <div class="navigation">
       <div class="logo-container">
-        <a href="">
+        <a @click="changeTab('MainPage')">
           <img class="" src="./img/logo.png"/>
         </a>
       </div>
@@ -16,15 +16,20 @@
         <a class="nav-link" @click="changeTab('MyBooks')">MY BOOKS</a>
       </div>
       <div class="nav-item">
-        <a class="nav-link">BROWSER</a>
+        <a class="nav-link" @click="changeTab('MyBooks')">BROWSER</a>
       </div>
       <div class="nav-item">
-        <a class="nav-link">SIGN UP</a>
+        <a class="nav-link" @click="changeTab('Account')">SIGN UP</a>
       </div>
     </div>
     <div class="main-content">
-      <MainPage v-if="curTabName === 'mainPage'" />
-      <BookList v-if="curTabName === 'MyBooks'" />
+      <MainPage v-if="curTabName === 'MainPage'" />
+      <BookList
+        v-if="curTabName === 'MyBooks'"
+        :headerShow="true"
+        categoryTitle="My Books"
+        style="padding: 0 15%;padding-top: 30px;" />
+      <Account v-if="curTabName === 'Account'" />
     </div>
   </div>
 </template>
@@ -62,7 +67,7 @@ a {
   font: 14px roboto condensed,sans-serif;
 }
 a.nav-link:hover {
-  color: #6ab5f3
+  color: $custom-color
 }
 .nav-item {
   width: 102px;
@@ -96,8 +101,8 @@ a.nav-link:hover {
   font: italic 13px roboto condensed,sans-serif;
   color: #fff;
   width: 75px;
-  background-color: #47bc95;
-  border: 1px solid #47bc95;
+  background-color: $custom-color;
+  border: 1px solid $custom-color;
   margin-left: 15px;
 }
 .searchicon {
@@ -119,6 +124,7 @@ import BookOperator from './components/book-operator'
 import BookInfo from './components/book-info'
 import ReadPage from './components/read-page.vue'
 import MainPage from './components/main-page'
+import Account from './components/account/account.vue'
 export default {
   name: 'App',
   components: {
@@ -127,7 +133,8 @@ export default {
     BookOperator,
     BookInfo,
     ReadPage,
-    MainPage
+    MainPage,
+    Account
   },
   data () {
     return {

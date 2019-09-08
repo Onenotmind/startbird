@@ -1,11 +1,13 @@
 <template>
   <div id="mainPage" v-bind="$attrs">
     <div class="home_header">
-      Welcome to Wunoland! Let's start with an email!
+      Welcome to Wunoland! Sign up with an email!
     </div>
+    <!--
     <div align="center">
-      <Input placeholder="please enter an email to sign up..."  class="custom-input"></Input>
+      <Input placeholder="please enter your email to sign up..."  class="custom-input"></Input>
     </div>
+    -->
     <div class="home_recommended">
       <h2 class="title">
         TODAY'S SPECIAL
@@ -32,7 +34,7 @@
   padding-top:20px;
   padding-bottom:40px;
   margin-bottom:30px;
-  color:#47bc95;
+  color:$custom-color;
   font:35px crimson text,serif
 }
 .custom-input {
