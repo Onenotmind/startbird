@@ -1,6 +1,6 @@
 <template>
-  <div id="bookItem" v-bind="$attrs">
-    <a :href="bookSrc">
+  <div id="bookItem" v-bind="$attrs" @click="switchToBookInfo">
+    <a>
       <div class="book_cover">
         <img :src="bookCover" class="book_cover_image">
       </div>
@@ -73,6 +73,14 @@ export default {
       type: String,
       default: 'https://baidu.com'
     },
+    price: {
+      type: String,
+      default: ''
+    },
+    bookId: {
+      type: String,
+      default: ''
+    },
     title: {
       type: String,
       default: 'Anna Karenina'
@@ -84,6 +92,10 @@ export default {
     author: {
       type: String,
       default: 'Leo Tolstoy'
+    },
+    description: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -92,6 +104,18 @@ export default {
     }
   },
   methods: {
+    switchToBookInfo() {
+      this.$emit('switch-to-bookinfo', {
+        bookCover: this.bookCover,
+        bookSrc: this.bookSrc,
+        title: this.title,
+        rateIndex: this.rateIndex,
+        author: this.author,
+        price: this.price,
+        bookId: this.bookId,
+        description: this.description
+      })
+    }
   }
 }
 </script>

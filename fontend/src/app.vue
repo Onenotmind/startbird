@@ -23,13 +23,23 @@
       </div>
     </div>
     <div class="main-content">
-      <MainPage v-if="curTabName === 'MainPage'" />
+      <MainPage
+        v-if="curTabName === 'MainPage'"
+        @switch-to-bookinfo="switchToBookInfo" />
       <BookList
         v-if="curTabName === 'MyBooks'"
         :headerShow="true"
         categoryTitle="My Books"
-        style="padding: 0 15%;padding-top: 30px;" />
+        style="padding: 0 15%;padding-top: 30px;"
+        @switch-to-bookinfo="switchToBookInfo" />
       <Account v-if="curTabName === 'Account'" />
+      <BookInfo
+        v-if="curTabName === 'BookInfo'"
+        :bookInfo="bookInfo"
+        @read-chapter="readChapter" />
+      <ReadPage
+        ref="readPage"
+        v-if="curTabName === 'Readpage'" />
     </div>
   </div>
 </template>
@@ -125,6 +135,7 @@ import BookInfo from './components/book-info'
 import ReadPage from './components/read-page.vue'
 import MainPage from './components/main-page'
 import Account from './components/account/account.vue'
+import _ from 'lodash'
 export default {
   name: 'App',
   components: {
@@ -138,7 +149,8 @@ export default {
   },
   data () {
     return {
-      curTabName: 'MainPage'
+      curTabName: 'MainPage',
+      bookInfo: {}
     }
   },
   computed: {
@@ -151,6 +163,16 @@ export default {
   methods: {
     changeTab (val) {
       this.curTabName = val
+    },
+    switchToBookInfo (val) {
+      this.curTabName = 'BookInfo'
+      this.bookInfo = _.cloneDeep(val)
+    },
+    readChapter (id) {
+      this.curTabName = 'Readpage'
+      this.$nextTick(() => {
+        this.$refs.readPage.getChapterContent(id)
+      })
     }
   }
 }

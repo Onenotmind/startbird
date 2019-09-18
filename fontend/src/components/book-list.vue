@@ -13,10 +13,14 @@
       <BookItem
         v-for="(item, idx) in bookItemArr"
         :key="'bookitem' + idx"
-        :bookSrc="item.bookSrc"
-        :bookCover="item.bookCover"
-        :title="item.title"
-        :author="item.author" />
+        :bookSrc="item.novel_origin_url"
+        :bookCover="item.novel_cover_img_url"
+        :title="item.novel_name"
+        :author="item.novel_author"
+        :price="item.novel_price"
+        :bookId="item.novel_id"
+        :description="item.novel_desciption"
+        @switch-to-bookinfo="switchToBookInfo" />
     </div>
   </div>
 </template>
@@ -91,6 +95,9 @@ export default {
 
   },
   methods: {
+    switchToBookInfo (val) {
+      this.$emit('switch-to-bookinfo', val)
+    }
   }
 }
 </script>

@@ -13,7 +13,9 @@
         TODAY'S SPECIAL
       </h2>
       <div>
-        <BookList />
+        <BookList
+          :bookItemArr="bookItemArr"
+          @switch-to-bookinfo="switchToBookInfo" />
       </div>
     </div>
   </div>
@@ -59,6 +61,7 @@ h2.title {
 </style>
 <script>
 import BookList from './book-list'
+import serverRequest from '@/libs/server-request.js'
 export default {
   name: 'App',
   components: {
@@ -66,7 +69,7 @@ export default {
   },
   data () {
     return {
-      
+      bookItemArr: []
     }
   },
   computed: {
@@ -74,9 +77,18 @@ export default {
   },
   watch: {
   },
-  mounted () {
+  async mounted () {
+    const data = await serverRequest.getTopFivePopularNovel()
+    if (data.data && data.data.status) {
+      console.warn('data:', data.data.data)
+      const res = JSON.parse(data.data.data)
+      this.bookItemArr = res.data
+    }
   },
   methods: {
+    switchToBookInfo (val) {
+      this.$emit('switch-to-bookinfo', val)
+    }
   }
 }
 </script>

@@ -2,27 +2,32 @@
   <div id="readPage" v-bind="$attrs">
     <div class="read_header">
       <span class="title">
-        <a class="change" :href="bookSrc">
+        <a class="change" @click="">
         {{ title }}
         </a>
       </span>
+      <!--
       <span class="catagory">
-        <a class="change catagory-text" :href="bookContentSrc">
+        <a class="change catagory-text" @click="">
         Content
         </a>
       </span>
+      -->
       <span class="page-turn">
-        <a class="change" :href="previousChapterSrc">
+        <a class="change" @click="">
           Previous
         </a>
       </span>
       <span class="page-turn">
-        <a class="change" :href="nextChapterSrc">
+        <a class="change" @click="">
           Next
         </a>
       </span>
     </div>
-    <div class="read_content">
+    <div class="read_content" v-html="chapterInfo.chapter_content">
+    {{chapterInfo.chapter_content}}
+      
+    <!--
       <div v-for="(item, index) in contentArr" :key="'content' + index">
         <h2 class="content_title" align="center" v-if="item.type === 'title'">
           {{ item.content}}
@@ -31,15 +36,16 @@
           {{ item.content}}
         </p>
       </div>
+      -->
     </div>
     <div class="read_footer">
       <span class="page-turn">
-        <a class="change" :href="previousChapterSrc">
+        <a class="change" @click="">
           Previous
         </a>
       </span>
       <span class="page-turn">
-        <a class="change" :href="nextChapterSrc">
+        <a class="change" @click="">
           Next
         </a>
       </span>
@@ -106,7 +112,8 @@ h2.content_title {
 }
 </style>
 <script>
-
+import serverRequest from '@/libs/server-request.js'
+import { escapeSpecialChars } from '@/libs/utils.js'
 export default {
   name: 'ReadPage',
   components: {
@@ -146,7 +153,7 @@ export default {
   },
   data () {
     return {
-      
+      chapterInfo: {}
     }
   },
   computed: {
@@ -157,6 +164,15 @@ export default {
   mounted () {
   },
   methods: {
+    async getChapterContent (id) {
+      console.warn(escapeSpecialChars('IIIHHH'))
+      
+      const data = await serverRequest.getChapterById(id)
+      if (data.data && data.data.status) {
+        const res = JSON.parse(escapeSpecialChars(data.data.data))
+        this.chapterInfo = res.data[0]
+      }
+    }
   }
 }
 </script>
