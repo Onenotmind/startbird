@@ -16,8 +16,10 @@ module.exports = {
   //   __filename: false
   // },
   output: {
+    library: 'webpackUMD',
+    libraryTarget: 'umd',
     path: resolve('dist'),
-    filename: '[name].js'
+    filename: 'index.js'
   },
   // 本地服务的相关配置
   devServer: {
